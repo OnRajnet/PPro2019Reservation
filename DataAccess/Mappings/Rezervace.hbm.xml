@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="DataAccess" namespace="DataAccess.Model">
+
+  <class name="Lepenka" table="Rezervations">
+    <id name="Id" column="Id">
+      <generator class="native" />
+    </id>
+    <property name="User"  column="Users"/>
+    <many-to-one name="User" column="Id" foreign-key="Id" />
+    <many-to-one name="Lepenka " column="LepenkaID" foreign-key="LepenkaID" />
+    <many-to-one name="Kartonaz" column="KartonazID" foreign-key="Id" />
+    <property name="Datum"  column="Datetime"/>
+    
+  </class>
+
+</hibernate-mapping>

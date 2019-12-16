@@ -1,0 +1,59 @@
+﻿
+@using DataAccess.Model
+@model IList<Kartonaz>
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Přehled kartonáže</h2>
+
+<div class="panel">
+    <div class="panel-body">
+        @using (Html.BeginForm("Search", "Kartonaz"))
+        {
+            <input type="text" class="form-control" placeholder="Vyhledat kartonaz (rozměr)" name="phrase" />
+            <input type="submit" value="Hledat" class="btn btn-default" />
+        }
+
+
+    </div>
+</div>
+
+
+<a href="@Url.Action("Create","Kartonaz")" class="btn btn-default pull-right">Vytvoření kartonáže</a>
+<div class="clearfix"></div>
+
+<br/>
+
+
+<table class="table table-bordered table-hover table-condensed">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Název</th>
+            <th>Rozměr</th>
+            <th>Pocet</th>
+            <th>Akce</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Kartonaz k in Model)
+        {
+            <tr>
+                <td>@k.Id</td>
+                <td>@k.Oznaceni</td>
+                <td>@k.Rozmer</td>
+                <td>@k.Pocet</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "Kartonaz", new { id = k.Id }, null)
+                    @Html.ActionLink("Delete", "Delete", "Kartonaz", new { id = k.Id }, new { onclick = "return confirm('Přejete si opravdu smazat položku " + k.Id + " " + k.Oznaceni + " " + k.Rozmer + "');" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+

@@ -1,0 +1,76 @@
+﻿
+@using DataAccess.Model
+@model IList<Lepenka>
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Přehled dostupných lepenek</h2>
+
+<div class="clearfix"></div>
+
+<div class="panel">
+    <div class="panel-body">
+        @using (Html.BeginForm("Search", "Lepenky"))
+        {
+            <input type="text" class="form-control" placeholder="Vyhledat lepenku" name="phrase" />
+            <input type="submit" value="Hledat" class="btn btn-default" />
+        }
+
+
+    </div>
+</div>
+
+<div class="panel">
+    <div class="panel-body">
+        @if (ViewBag.Kvalita != null)
+        {
+            foreach (LepenkaKvalita bc in ViewBag.Kvalita)
+            {
+                <a href="@Url.Action("Kvalita", "Lepenky", new{id=bc.Id})">@bc.Kvalita</a>
+            }
+        }
+    </div>
+</div>
+
+
+
+<table class="table table-bordered table-hover table-condensed">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Název</th>
+            <th>Gramáž</th>
+            <th>Rozměr</th>
+            <th>Kvalita</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Lepenka l in Model)
+        {
+            <tr>
+                <td>@l.Id</td>
+                <td>@l.Nazev</td>
+                <td>@l.Gramaz</td>
+                <td>@l.Rozmer</td>
+                <td>@l.Kvalita.Kvalita</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (ViewBag.Pages != null)
+{
+
+    <ul class="pagination">
+
+        @for (int i = 1; i <= ViewBag.Pages; i++)
+        {
+
+            <li class="@(ViewBag.CurrentPage == i ? "active" : "")"><a href="@Url.Action("Index", "Lepenky", new { page = i })">@i</a></li>
+
+        }
+    </ul>
+}

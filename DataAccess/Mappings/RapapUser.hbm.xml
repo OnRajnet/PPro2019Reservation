@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="DataAccess" namespace="DataAccess.Model">
+
+  <class name="RapapUser" table="Users" lazy="false">
+    <id name="Id" column="Id">
+      <generator class="native" />
+    </id>
+    <property name="Jmeno"  column="Sure_Name"/>
+    <property name="Prijmeni"  column="Last_Name"/>
+    <property name="Login"  column="Login"/>
+    <property name="Password"  column="Password"/>
+    <many-to-one name="Role" column="Role_id" foreign-key="Role_id" />
+
+
+  </class>
+
+</hibernate-mapping>

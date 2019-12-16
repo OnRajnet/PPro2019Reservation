@@ -1,0 +1,41 @@
+﻿
+@using DataAccess.Model
+@model List<Kartonaz>
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Přehled dostupné kartonáže</h2>
+
+<div class="clearfix"></div>
+
+
+<table class="table table-bordered table-hover table-condensed">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Název</th>
+            <th>Rozměr</th>
+            <th>Počet kusů</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Kartonaz k in Model)
+        {
+            <tr>
+                <td>@k.Id</td>
+                <td>@k.Oznaceni</td>
+                <td>@k.Rozmer</td>
+                <td>@k.Pocet</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
+
+

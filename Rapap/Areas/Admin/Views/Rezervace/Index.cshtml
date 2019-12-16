@@ -1,0 +1,37 @@
+﻿
+@using DataAccess.Model
+@model IList<Rezervace>
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<h2>Objednávky</h2>
+
+<table class="table table-bordered table-hover table-condensed">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Produkt</th>
+            <th>User</th>
+            <th>Datum</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Rezervace r in Model)
+        {
+            <tr>
+                <<td>@r.Id</td>
+                <td>@r.User</td>
+                <td>@r.Kartonaz</td>
+                <td>@r.Lepenka</td>
+                <td>@r.Datum</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+

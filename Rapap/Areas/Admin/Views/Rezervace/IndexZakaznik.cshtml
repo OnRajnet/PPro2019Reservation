@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewBag.Title = "IndexZakaznik";
+}
+
+<h2>IndexZakaznik</h2>
+
+@using System.Activities.Statements
+@using DataAccess.Model
+@model IList<Objednavka>
+
+
+@{
+    ViewBag.Title = "Index";
+
+    @using System.Activities.Statements
+    @using DataAccess.Model
+    @model IList<Rezervace>
+
+
+    @{
+        ViewBag.Title = "Index";
+    }
+
+        <h2>Moje objednávky</h2>
+
+        <div class="clearfix"></div>
+
+
+        <table class="table table-bordered table-hover table-condensed">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Uživatel</th>
+                    <th>Zboží</th>
+                    <th>Datum</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Rezervace r in Model)
+                {
+                    <tr>
+                        <td>@r.Id</td>
+                        <td>@r.User</td>
+                        <td>@r.Kartonaz</td>
+                        <td>@r.Lepenka</td>
+                        <td>@r.Datum</td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+
+        @if (ViewBag.Pages != null)
+        {
+
+            <ul class="pagination">
+
+                @for (int i = 1; i <= ViewBag.Pages; i++)
+                {
+
+                    <li class="@(ViewBag.CurrentPage == i ? "active" : "")"><a href="@Url.Action("Index", "Rezervace", new { page = i })">@i</a></li>
+
+                }
+            </ul>
+        }

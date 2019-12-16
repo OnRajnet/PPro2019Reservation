@@ -1,0 +1,26 @@
+﻿@model DataAccess.Model.RapapUser
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+
+@if (Model.Role.Identifikator == "admin")
+{
+    <li><a href="@Url.Action("Index", "Lepenky")">Správa lepenek knih</a></li>
+    <li><a href="@Url.Action("Index", "Kartonaz")">Správa kartonáže</a></li>
+    <li><a href="@Url.Action("Index", "User")">Správa uživatelů</a></li>
+    <li><a href="@Url.Action("Index", "Objednavka")">Správa objednávek</a></li>
+    <li><a href="@Url.Action("Index", "Poptavka")">Správa poptávek</a></li>
+
+
+}
+else if (Model.Role.Identifikator == "zakaznik")
+{
+    <li><a href="@Url.Action("Index", "Lepenky")">Lepenky</a></li>
+    <li><a href="@Url.Action("Index", "kartonaz")">Kartonáž</a></li>
+    <li><a href="@Url.Action("Index", "Objednavka")">Moje objednávky</a></li>
+    <li><a href="@Url.Action("Index", "Poptavka")">Poptávky</a></li>
+}
+
+
+<li><a href="@Url.Action("Logout", "Login")">Log-out</a></li>

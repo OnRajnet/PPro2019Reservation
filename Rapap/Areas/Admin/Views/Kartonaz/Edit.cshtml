@@ -1,0 +1,45 @@
+﻿@model DataAccess.Model.Kartonaz
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Editace</h2>
+
+@Html.ValidationSummary()
+
+@using (Html.BeginForm("Update", "Kartonaz", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(x => x.Id)
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Název</label>
+        <div class="col-sm-10">
+            @Html.TextBoxFor(x => x.Oznaceni, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Oznaceni)
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Rozměr</label>
+        <div class="col-sm-10">
+            @Html.TextBoxFor(x => x.Rozmer, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Rozmer)
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Gramáž</label>
+        <div class="col-sm-10">
+            @Html.TextBoxFor(x => x.Pocet, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Pocet)
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">Upravit lepenku</button>
+        </div>
+    </div>
+}
+    <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+    <script>tinymce.init({ selector: '.formatedtext' });</script>
+
+

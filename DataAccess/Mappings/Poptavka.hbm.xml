@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="DataAccess" namespace="DataAccess.Model">
+
+  <class name="Poptavka" table="Inquiries">
+    <id name="Id" column="Id">
+      <generator class="native" />
+    </id>
+    <property name="Jmeno"  column="Sure_Name"/>
+    <property name="Prijmeni"  column="Last_Name"/>
+    <property name="Email"  column="Email"/>
+    <property name="Cislo"  column="Number"/>
+    <property name="Zprava"  column="Message"/>
+    <many-to-one name="Typ" column="Area_Id" foreign-key="Area_Id" />
+
+  </class>
+
+</hibernate-mapping>
