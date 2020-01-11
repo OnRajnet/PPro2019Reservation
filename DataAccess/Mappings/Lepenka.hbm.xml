@@ -1,13 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="DataAccess" namespace="DataAccess.Model">
 
-  <class name="Lepenka" table="Cardboards">
+  <class name="Lepenka" table="Cardboars">
     <id name="Id" column="Id">
       <generator class="native" />
     </id>
     <property name="Nazev"  column="Title"/>
     <property name="Gramaz"  column="Grammage"/>
     <property name="Rozmer"  column="Dimension"/>
+    <property name="Vaha"  column="Weight"/>
     <many-to-one name="Kvalita" column="Quality_Id" foreign-key="Quality_Id" />
     
   </class>

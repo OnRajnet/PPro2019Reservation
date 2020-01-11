@@ -9,7 +9,7 @@
     <property name="Prijmeni"  column="Last_Name"/>
     <property name="Login"  column="Login"/>
     <property name="Password"  column="Password"/>
-    <many-to-one name="Role" column="Role_id" foreign-key="Role_id" />
+    <many-to-one name="Role" column="Role_Id" foreign-key="Role_Id" />
 
 
   </class>

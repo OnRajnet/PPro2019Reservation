@@ -15,7 +15,7 @@ namespace DataAccess.Dao
         }
 
 
-        public IList<Kartonaz> GetLepenkyLists(int count, int page, out int totalKartony)
+        public IList<Kartonaz> GetKartonyLists(int count, int page, out int totalKartony)
         {
             totalKartony = session.CreateCriteria<Kartonaz>()
                 .SetProjection(Projections.RowCount())
@@ -25,6 +25,13 @@ namespace DataAccess.Dao
                 .AddOrder(Order.Asc("Id"))
                 .SetFirstResult((page - 1) * count)
                 .SetMaxResults(count)
+                .List<Kartonaz>();
+        }
+
+        public IList<Kartonaz> GetKartonyLists2()
+        {
+            return session.CreateCriteria<Kartonaz>()
+                .AddOrder(Order.Asc("Id"))
                 .List<Kartonaz>();
         }
 

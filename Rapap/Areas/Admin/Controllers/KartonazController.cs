@@ -13,73 +13,59 @@ namespace Rapap.Areas.Admin.Controllers
         // GET: Admin/Kartonaz
         public ActionResult Index(int? page)
         {
-
             int itemsOnPage = 45;
             int pg = page.HasValue ? page.Value : 1;
             int totalKartony;
 
-
-
             KartonazDao kartonazDao = new KartonazDao();
-            IList<Kartonaz> kartony = kartonazDao.GetLepenkyLists(itemsOnPage, pg, out totalKartony);
+            IList<Kartonaz> kartony = kartonazDao.GetKartonyLists(itemsOnPage, pg, out totalKartony);
 
             ViewBag.Pages = (int)Math.Ceiling((double)totalKartony / (double)itemsOnPage);
             ViewBag.CurrentPage = pg;
 
-            ViewBag.Kvality = new LepenkyKvalitaDao().GetAll();
             RapapUser user = new RapapUserDao().GetByLogin(User.Identity.Name);
 
             if (user.Role.Identifikator == "zakaznik")
                 return View("IndexZakaznik", kartony);
 
-
             return View(kartony);
-
-
         }
 
         public ActionResult Search(string phrase)
         {
-
             KartonazDao kartonazDao = new KartonazDao();
             IList<Kartonaz> kartony = kartonazDao.SearchKartonaz(phrase);
 
             return View("IndexZakaznik", kartony);
-
         }
 
         [HttpPost]
-        public ActionResult Reserve()
+        public ActionResult Reserve(FormCollection data)
         {
-            if (ViewData.Model is IList<Kartonaz>)
-            {
-                IList<Kartonaz> data = ViewData.Model as IList<Kartonaz>;
-                foreach (var item in data.Where(x => x.IsSelected))
+            /*foreach (var item in data.Where(x => x.IsSelected))
                 {
                     try
                     {
-                        // misto toho tady pridat novy zaznam do tabulky rezervaci pro tento item a tohoto usera
-                        //item.Id
-                        
 
-
-                        KartonazDao kartonazDao = new KartonazDao();
-                        kartonazDao.Update(item);
-                        TempData["message-success"] = "Kartonáž číslo: " + item.Id + " byla rezervována.";
-
+                        RezervaceDao rezervaceDao = new RezervaceDao();
+                        rezervaceDao.Create(new Rezervace() {Kartonaz = item});
+                        TempData["message-success"] = "Položka byla úspěšně rezervována";
                     }
                     catch (Exception)
                     {
                         throw;
                     }
-
-                    // na konci deselectovat vsechny, aby az se tam vratí view
                     item.IsSelected = false;
-                }
-            }
+                }*/
 
             return RedirectToAction("Index");
         }
+
+        public ActionResult CreateReserve()
+        {
+            return View();
+        }
+
 
         [Authorize(Roles = "Admin")]
         public ActionResult Create()

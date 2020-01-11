@@ -51,8 +51,6 @@ namespace Rapap.Areas.Admin.Controllers
             return View();
         }
 
-
-
         [HttpPost]
         public ActionResult Add(RapapUser user, int roleId)
         {

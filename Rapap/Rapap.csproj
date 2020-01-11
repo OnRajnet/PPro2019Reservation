@@ -159,8 +159,6 @@
     <Content Include="Areas\Admin\Views\Kartonaz\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Kartonaz\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Kartonaz\IndexZakaznik.cshtml" />
-    <Content Include="Areas\Admin\Views\Objednavka\IndexZakaznik.cshtml" />
-    <Content Include="Areas\Admin\Views\Objednavka\Index.cshtml" />
     <Content Include="Areas\Admin\Views\User\Index.cshtml" />
     <Content Include="Areas\Admin\Views\User\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Poptavka\IndexZakaznik.cshtml" />
@@ -202,7 +200,6 @@
     <Compile Include="Areas\Admin\Controllers\LepenkyController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
     <Compile Include="Areas\Admin\Controllers\MenuController.cs" />
-    <Compile Include="Areas\Admin\Controllers\ObjednavkaController.cs" />
     <Compile Include="Areas\Admin\Controllers\PoptavkaController.cs" />
     <Compile Include="Areas\Admin\Controllers\RezervaceController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
@@ -211,7 +208,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KartonController.cs" />
     <Compile Include="Controllers\LepenkaController.cs" />
-    <Compile Include="Controllers\ObjednavkaController.cs" />
     <Compile Include="Controllers\PoptavkaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

@@ -18,6 +18,9 @@ namespace DataAccess.Model
         public virtual string Rozmer { get; set; }
         [Required(ErrorMessage = "Gramáž lepenky je vyžadována")]
         public virtual int Gramaz { get; set; }
+        [Required(ErrorMessage = "Váha lepenky je vyžadována")]
+        public virtual int Vaha { get; set; }
+        [Required(ErrorMessage = "Kvalita lepenky je vyžadována")]
         public virtual LepenkaKvalita Kvalita { get; set; }
 
         public virtual bool IsSelected { get; set; }

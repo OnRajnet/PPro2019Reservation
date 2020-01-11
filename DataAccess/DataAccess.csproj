@@ -54,7 +54,6 @@
   <ItemGroup>
     <Compile Include="Dao\DaoBase.cs" />
     <Compile Include="Dao\KartonazDao.cs" />
-    <Compile Include="Dao\ObjednavkaDao.cs" />
     <Compile Include="Dao\OblastDao.cs" />
     <Compile Include="Dao\PoptavkaDao.cs" />
     <Compile Include="Dao\RapapRoleDao.cs" />
@@ -68,7 +67,6 @@
     <Compile Include="Model\Kartonaz.cs" />
     <Compile Include="Model\Lepenka.cs" />
     <Compile Include="Model\LepenkaKvalita.cs" />
-    <Compile Include="Model\Objednavka.cs" />
     <Compile Include="Model\Oblast.cs" />
     <Compile Include="Model\Poptavka.cs" />
     <Compile Include="Model\RapapRole.cs" />
@@ -110,10 +108,9 @@
     <EmbeddedResource Include="Mappings\RapapRole.hbm.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Mappings\RapapUser.hbm.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Mappings\Objednavka.hbm.xml" />
+    <EmbeddedResource Include="Mappings\RapapUser.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Mappings\Oblast.hbm.xml" />
@@ -122,7 +119,9 @@
     <EmbeddedResource Include="Mappings\Poptavka.hbm.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Mappings\Rezervace.hbm.xml" />
+    <EmbeddedResource Include="Mappings\Rezervace.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

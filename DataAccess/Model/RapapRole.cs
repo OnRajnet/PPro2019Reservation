@@ -12,7 +12,6 @@ namespace DataAccess.Model
 
         public virtual int Id { get; set; }
         public virtual string Identifikator { get; set; }
-        public virtual string Popis { get; set; }
 
     }
 }

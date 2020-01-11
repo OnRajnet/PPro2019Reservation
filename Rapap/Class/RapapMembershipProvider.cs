@@ -181,7 +181,7 @@ namespace Rapap.Class
         public override bool ValidateUser(string username, string password)
         {
             RapapUserDao rapapUserDao = new RapapUserDao();
-            RapapUser user = rapapUserDao.GetByLoginAndPassword(username, rapapUserDao.Encrypt(password));
+            RapapUser user = rapapUserDao.GetByLogin(username);
 
             return user != null;
         }

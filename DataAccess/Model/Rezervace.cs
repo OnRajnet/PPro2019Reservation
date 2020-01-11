@@ -11,9 +11,9 @@ namespace DataAccess.Model
     {
         public virtual int Id { get; set; }
         public virtual RapapUser User { get; set; }
+        public virtual DateTime Datum { get; set; }
         public virtual Lepenka Lepenka { get; set; }
         public virtual Kartonaz Kartonaz { get; set; }
-        public virtual DateTime Datum { get; set; }
 
     }
 }

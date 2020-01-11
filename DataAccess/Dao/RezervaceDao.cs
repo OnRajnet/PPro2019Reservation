@@ -47,5 +47,5 @@ namespace DataAccess.Dao
         }
     }
 
-    //dodělat vse
+    
 }

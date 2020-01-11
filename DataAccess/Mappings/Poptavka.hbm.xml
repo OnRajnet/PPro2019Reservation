@@ -10,7 +10,7 @@
     <property name="Email"  column="Email"/>
     <property name="Cislo"  column="Number"/>
     <property name="Zprava"  column="Message"/>
-    <many-to-one name="Typ" column="Area_Id" foreign-key="Area_Id" />
+    <many-to-one name="Typ" column="Areas_Id" foreign-key="Areas_Id" />
 
   </class>
 
