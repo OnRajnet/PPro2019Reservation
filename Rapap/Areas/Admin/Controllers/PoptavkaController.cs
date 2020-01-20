@@ -10,7 +10,7 @@ namespace Rapap.Areas.Admin.Controllers
 {
     public class PoptavkaController : Controller
     {
-        // GET: Lepenka
+        
         public ActionResult Index(int? page, string druh)
         {
 
@@ -27,15 +27,13 @@ namespace Rapap.Areas.Admin.Controllers
             ViewBag.CurrentPage = pg;
 
 
-            ViewBag.Kvality = new OblastDao().GetAll();
+            ViewBag.Typ = new OblastDao().GetAll();
             RapapUser user = new RapapUserDao().GetByLogin(User.Identity.Name);
 
             if (user.Role.Identifikator == "zakaznik")
                 return View("IndexZakaznik", poptavky);
 
             return View(poptavky);
-
-
         }
 
         public ActionResult Search(string phrase)
@@ -52,7 +50,7 @@ namespace Rapap.Areas.Admin.Controllers
         {
 
             IList<Poptavka> poptavky = new PoptavkaDao().GetPoptavkyInOblastId(oblastId);
-            ViewBag.Kvality = new OblastDao().GetAll();
+            ViewBag.Typ = new OblastDao().GetAll();
             return View("IndexZakaznik", poptavky);
 
         }
@@ -62,7 +60,7 @@ namespace Rapap.Areas.Admin.Controllers
 
             OblastDao oblastDao = new OblastDao();
             IList<Oblast> oblast = oblastDao.GetAll();
-            ViewBag.Kvalita = oblast;
+            ViewBag.Typ = oblast;
 
             return View();
         }

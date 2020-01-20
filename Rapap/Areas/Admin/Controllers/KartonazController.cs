@@ -42,21 +42,34 @@ namespace Rapap.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Reserve(FormCollection data)
         {
-            /*foreach (var item in data.Where(x => x.IsSelected))
-                {
-                    try
-                    {
+            KartonazDao kartonazDao = new KartonazDao();
+            RezervaceDao rezervaceDao = new RezervaceDao();
+            RapapUser user = new RapapUserDao().GetByLogin(User.Identity.Name);
 
-                        RezervaceDao rezervaceDao = new RezervaceDao();
-                        rezervaceDao.Create(new Rezervace() {Kartonaz = item});
+            foreach (string key in data.AllKeys)
+            {
+                try
+                {
+                    if (data[key] != "false")
+                    {
+                        int id = int.Parse(key.Substring("chbxIsSelected".Length));
+                        Kartonaz kartonaz = kartonazDao.GetById(id);
+
+                        rezervaceDao.Create(new Rezervace()
+                        {
+                            Datum = DateTime.UtcNow,
+                            Kartonaz = kartonaz,
+                            Lepenka = null,
+                            User = user
+                        });
                         TempData["message-success"] = "Položka byla úspěšně rezervována";
                     }
-                    catch (Exception)
-                    {
-                        throw;
-                    }
-                    item.IsSelected = false;
-                }*/
+                }
+                catch (Exception)
+                {
+                    throw new HttpUnhandledException();
+                }
+            }
 
             return RedirectToAction("Index");
         }

@@ -44,7 +44,7 @@
                     <td>@k.Oznaceni</td>
                     <td>@k.Rozmer</td>
                     <td>@k.Pocet</td>
-                    <td>@Html.CheckBox("chbxIsSelected", k.IsSelected)</td>
+                    <td>@Html.CheckBox("chbxIsSelected" + k.Id, k.IsSelected)</td>
                 </tr>
             }
         </tbody>

@@ -20,5 +20,10 @@ namespace DataAccess.Model
         public virtual int Pocet { get; set; }
 
         public virtual bool IsSelected { get; set; }
+
+        public override string ToString()
+        {
+            return Oznaceni;
+        }
     }
 }

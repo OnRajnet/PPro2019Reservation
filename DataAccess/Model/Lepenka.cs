@@ -24,5 +24,10 @@ namespace DataAccess.Model
         public virtual LepenkaKvalita Kvalita { get; set; }
 
         public virtual bool IsSelected { get; set; }
+
+        public override string ToString()
+        {
+            return Nazev;
+        }
     }
 }

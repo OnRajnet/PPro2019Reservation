@@ -24,14 +24,14 @@ namespace Rapap.Controllers
 
             OblastDao oblastDao = new OblastDao();
             IList<Oblast> oblast = oblastDao.GetAll();
-            ViewBag.Kvalita = oblast;
+            ViewBag.Typ = oblast;
 
             return View();
         }
+
         [HttpPost]
         public ActionResult Add(Poptavka poptavka, int oblastId)
         {
-
             if (ModelState.IsValid)
             {
                 OblastDao oblastDao = new OblastDao();
@@ -47,11 +47,11 @@ namespace Rapap.Controllers
             }
             else
             {
+                ViewBag.Typ = new OblastDao().GetAll();
                 return View("Create", poptavka);
             }
 
             return RedirectToAction("Index");
         }
-
     }
 }
