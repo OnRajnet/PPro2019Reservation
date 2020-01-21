@@ -28,6 +28,7 @@ namespace Rapap.Controllers
 
             return View();
         }
+
         [HttpPost]
         public ActionResult Add(Poptavka poptavka, int oblastId)
         {

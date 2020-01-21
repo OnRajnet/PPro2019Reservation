@@ -193,8 +193,45 @@ namespace Rapap.Areas.Admin.Controllers
 
                 return RedirectToAction("Index");
             }
-        
 
+            [HttpPost]
+            public ActionResult Reserve(FormCollection data)
+        {
+            LepenkaDao lepenkaDao = new LepenkaDao();
+            RezervaceDao rezervaceDao = new RezervaceDao();
+            RapapUser user = new RapapUserDao().GetByLogin(User.Identity.Name);
 
+            foreach (string key in data.AllKeys)
+            {
+                try
+                {
+                    if (data[key] != "false")
+                    {
+                        int id = int.Parse(key.Substring("chbxIsSelected".Length));
+                        Lepenka lepenka = lepenkaDao.GetById(id);
+
+                        rezervaceDao.Create(new Rezervace()
+                        {
+                            Datum = DateTime.UtcNow,
+                            Kartonaz = null,
+                            Lepenka = lepenka,
+                            User = user
+                        });
+                        TempData["message-success"] = "Položka/y byla úspěšně rezervována";
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new HttpUnhandledException();
+                }
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult CreateReserve()
+        {
+            return View();
+        }
     }
 }

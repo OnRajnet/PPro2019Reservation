@@ -33,6 +33,7 @@ namespace DataAccess.Dao
                 .SetMaxResults(count)
                 .List<Rezervace>();
         }
+
         public IList<Poptavka> SearchRezervace(string phrase)
         {
             return session.CreateCriteria<Poptavka>()
