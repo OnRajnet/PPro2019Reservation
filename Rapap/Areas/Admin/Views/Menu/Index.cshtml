@@ -6,7 +6,7 @@
 
 @if (Model.Role.Identifikator == "admin")
 {
-    <li><a href="@Url.Action("Index", "Lepenky")">Správa lepenek knih</a></li>
+    <li><a href="@Url.Action("Index", "Lepenky")">Správa lepenek</a></li>
     <li><a href="@Url.Action("Index", "Kartonaz")">Správa kartonáže</a></li>
     <li><a href="@Url.Action("Index", "User")">Správa uživatelů</a></li>
     <li><a href="@Url.Action("Index", "Rezervace")">Správa Rezervací</a></li>
@@ -23,4 +23,4 @@ else if (Model.Role.Identifikator == "zakaznik")
 }
 
 
-<li><a href="@Url.Action("Logout", "Login")">Log-out</a></li>
+<li><a href="@Url.Action("Logout", "Login")">Odhlásit</a></li>

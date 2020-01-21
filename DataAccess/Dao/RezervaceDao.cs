@@ -13,10 +13,8 @@ namespace DataAccess.Dao
         public RezervaceDao() : base() {
         }
 
-
         public IList<Rezervace> GetRezervaceLists(int count, int page, string druh, out int totalRezervace)
         {
-
             totalRezervace = session.CreateCriteria<Rezervace>()
                 .SetProjection(Projections.RowCount())
                 .UniqueResult<int>();
@@ -37,8 +35,6 @@ namespace DataAccess.Dao
         }
         public IList<Poptavka> SearchRezervace(string phrase)
         {
-
-
             return session.CreateCriteria<Poptavka>()
                 .Add(Restrictions.Like("Jmeno", string.Format("%{0}%", phrase)))
 

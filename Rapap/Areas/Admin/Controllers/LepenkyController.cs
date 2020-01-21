@@ -32,30 +32,66 @@ namespace Rapap.Areas.Admin.Controllers
             if (user.Role.Identifikator == "zakaznik")
                 return View("IndexZakaznik", lepenky);
 
-
                 return View(lepenky);
-
-
             }
 
-             public ActionResult Search(string phrase)
-        {
+            public ActionResult Search(string phrase)
+            {
 
             LepenkaDao lepenkadao = new LepenkaDao();
             IList<Lepenka> lepenky = lepenkadao.SearchLepenky(phrase);
 
             return View("IndexZakaznik", lepenky);
 
-        }
+            }
+            
+            [HttpPost]
+            public ActionResult Reserve(FormCollection data)
+            {
+                LepenkaDao lepenkaDao = new LepenkaDao();
+                RezervaceDao rezervaceDao = new RezervaceDao();
+                RapapUser user = new RapapUserDao().GetByLogin(User.Identity.Name);
 
-        public ActionResult Kvalita(int kvalitaId)
-        {
+                foreach (string key in data.AllKeys)
+                {
+                    try
+                    {
+                        if (data[key] != "false")
+                        {
+                            int id = int.Parse(key.Substring("chbxIsSelected".Length));
+                            Lepenka lepenka = lepenkaDao.GetById(id);
 
-            IList<Lepenka> lepenky = new LepenkaDao().GetLepenkyInKvalitaId(kvalitaId);
-            ViewBag.Kvality = new LepenkyKvalitaDao().GetAll();
-            return View("IndexZakaznik", lepenky);
+                            rezervaceDao.Create(new Rezervace()
+                            {
+                                Datum = DateTime.UtcNow,
+                                Kartonaz = null,
+                                Lepenka = lepenka,
+                                User = user
+                            });
+                            TempData["message-success"] = "Položka byla úspěšně rezervována";
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        throw new HttpUnhandledException();
+                    }
+                }
+                return RedirectToAction("Index");
+            }
 
-        }
+            public ActionResult CreateReserve()
+            {
+                return View();
+            }
+
+            public ActionResult Kvalita(int kvalitaId)
+            {
+
+                IList<Lepenka> lepenky = new LepenkaDao().GetLepenkyInKvalitaId(kvalitaId);
+                ViewBag.Kvality = new LepenkyKvalitaDao().GetAll();
+                return View("IndexZakaznik", lepenky);
+
+            }
 
 
 

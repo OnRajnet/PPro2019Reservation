@@ -10,15 +10,11 @@ namespace Rapap.Areas.Admin.Controllers
 {
     public class PoptavkaController : Controller
     {
-        // GET: Lepenka
         public ActionResult Index(int? page, string druh)
         {
-
             int itemsOnPage = 45;
             int pg = page.HasValue ? page.Value : 1;
             int totalPoptavky;
-
-
 
             PoptavkaDao poptavkaDao = new PoptavkaDao();
             IList<Poptavka> poptavky = poptavkaDao.GetPoptavkyLists(itemsOnPage, pg, druh, out totalPoptavky);
@@ -26,43 +22,36 @@ namespace Rapap.Areas.Admin.Controllers
             ViewBag.Pages = (int)Math.Ceiling((double)totalPoptavky / (double)itemsOnPage);
             ViewBag.CurrentPage = pg;
 
-
-            ViewBag.Kvality = new OblastDao().GetAll();
+            ViewBag.Typ = new OblastDao().GetAll();
             RapapUser user = new RapapUserDao().GetByLogin(User.Identity.Name);
 
             if (user.Role.Identifikator == "zakaznik")
                 return View("IndexZakaznik", poptavky);
 
             return View(poptavky);
-
-
         }
 
         public ActionResult Search(string phrase)
         {
-
             PoptavkaDao poptavkaDao = new PoptavkaDao();
             IList<Poptavka> poptavky = poptavkaDao.SearchPoptavky(phrase);
 
             return View("IndexZakaznik", poptavky);
-
         }
 
         public ActionResult Oblast(int oblastId)
         {
-
             IList<Poptavka> poptavky = new PoptavkaDao().GetPoptavkyInOblastId(oblastId);
-            ViewBag.Kvality = new OblastDao().GetAll();
-            return View("IndexZakaznik", poptavky);
+            ViewBag.Typ = new OblastDao().GetAll();
 
+            return View("IndexZakaznik", poptavky);
         }
 
         public ActionResult Create()
         {
-
             OblastDao oblastDao = new OblastDao();
             IList<Oblast> oblast = oblastDao.GetAll();
-            ViewBag.Kvalita = oblast;
+            ViewBag.Typ = oblast;
 
             return View();
         }

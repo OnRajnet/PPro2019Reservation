@@ -12,17 +12,20 @@ namespace DataAccess.Model
     {
         public virtual int Id { get; set; }
 
-        [Required(ErrorMessage ="Název lepenky je vyžadován")]
+        [Required(ErrorMessage ="Zadejte název lepenky")]
         public virtual string Nazev { get; set; }
-        [Required(ErrorMessage = "Rozměr lepenky je vyžadován")]
+        [Required(ErrorMessage = "Zadejte rozměr lepenky")]
         public virtual string Rozmer { get; set; }
-        [Required(ErrorMessage = "Gramáž lepenky je vyžadována")]
+        [Required(ErrorMessage = "Zadejte gramáž lepenky")]
         public virtual int Gramaz { get; set; }
-        [Required(ErrorMessage = "Váha lepenky je vyžadována")]
+        [Required(ErrorMessage = "Zadejte váhu lepenky")]
         public virtual int Vaha { get; set; }
-        [Required(ErrorMessage = "Kvalita lepenky je vyžadována")]
+        [Required(ErrorMessage = "Zadejte kvalitu lepenky")]
         public virtual LepenkaKvalita Kvalita { get; set; }
-
         public virtual bool IsSelected { get; set; }
+        public override string ToString()
+        {
+            return Nazev;
+        }
     }
 }

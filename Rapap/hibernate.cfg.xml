@@ -3,7 +3,7 @@
   <session-factory name="NHibernate.Test">
     <property name="connection.driver_class">NHibernate.Driver.SqlClientDriver</property>
     <property name="connection.connection_string">
-      Server=DESKTOP-5QCNO4S\SQLEXPRESS;initial catalog=Ppro;Integrated Security=SSPI
+      Server=LAPTOP-AMQNJONQ;initial catalog=Ppro;Integrated Security=SSPI
     </property>
     <property name="dialect">NHibernate.Dialect.MsSql2008Dialect</property>
     <mapping assembly="DataAccess"/>

@@ -25,13 +25,19 @@
             <tbody>
                 @foreach (Rezervace r in Model)
                 {
-                    <tr>
-                        <td>@r.Id</td>
-                        <td>@r.User</td>
+                <tr>
+                    <td>@r.Id</td>
+                    <td>@r.User</td>
+                    @if (r.Lepenka == null && r.Kartonaz != null)
+                    {
                         <td>@r.Kartonaz</td>
+                    }
+                    else
+                    {
                         <td>@r.Lepenka</td>
-                        <td>@r.Datum</td>
-                    </tr>
+                    }
+                    <td>@r.Datum</td>
+                </tr>
 
                 }
             </tbody>

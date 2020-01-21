@@ -42,22 +42,34 @@ namespace Rapap.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Reserve(FormCollection data)
         {
-            /*foreach (var item in data.Where(x => x.IsSelected))
-                {
-                    try
-                    {
+            KartonazDao kartonazDao = new KartonazDao();
+            RezervaceDao rezervaceDao = new RezervaceDao();
+            RapapUser user = new RapapUserDao().GetByLogin(User.Identity.Name);
 
-                        RezervaceDao rezervaceDao = new RezervaceDao();
-                        rezervaceDao.Create(new Rezervace() {Kartonaz = item});
+            foreach (string key in data.AllKeys)
+            {
+                try
+                {
+                    if (data[key] != "false")
+                    {
+                        int id = int.Parse(key.Substring("chbxIsSelected".Length));
+                        Kartonaz kartonaz = kartonazDao.GetById(id);
+
+                        rezervaceDao.Create(new Rezervace()
+                        {
+                            Datum = DateTime.UtcNow,
+                            Kartonaz = kartonaz,
+                            Lepenka = null,
+                            User = user
+                        });
                         TempData["message-success"] = "Položka byla úspěšně rezervována";
                     }
-                    catch (Exception)
-                    {
-                        throw;
-                    }
-                    item.IsSelected = false;
-                }*/
-
+                }
+                catch (Exception)
+                {
+                    throw new HttpUnhandledException();
+                }
+            }
             return RedirectToAction("Index");
         }
 
@@ -70,7 +82,6 @@ namespace Rapap.Areas.Admin.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
-
             return View();
         }
 
@@ -78,61 +89,48 @@ namespace Rapap.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Add(Kartonaz karton)
         {
-
             if (ModelState.IsValid)
             {
                 KartonazDao kartonazDao = new KartonazDao();
                 kartonazDao.Create(karton);
 
                 TempData["message-success"] = "Položka byla úspěšně přidána";
-
             }
             else
             {
                 return View("Create", karton);
             }
-
             return RedirectToAction("Index");
         }
         [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id)
         {
-
             KartonazDao kartonazDao = new KartonazDao();
             Kartonaz k = kartonazDao.GetById(id);
             return View(k);
-
         }
         [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult Update(Kartonaz karton)
         {
-
             try
             {
-
                 KartonazDao kartonazDao = new KartonazDao();
                 kartonazDao.Update(karton);
                 TempData["message-success"] = "Kartonáž číslo: " + karton.Id + " , " + karton.Oznaceni + " , " + " Rozměr " + karton.Rozmer + " byla upravena";
-
             }
             catch (Exception)
             {
                 throw;
             }
-
-
             return RedirectToAction("Index", "Kartonaz");
-
         }
 
         [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
-
             try
             {
-
                 KartonazDao kartonyDao = new KartonazDao();
                 Kartonaz kartonaz = kartonyDao.GetById(id);
 

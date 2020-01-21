@@ -25,7 +25,7 @@ namespace Rapap.Areas.Admin.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            TempData["error"] = "Login nebo heslo neni spravne";
+            TempData["error"] = "Vaše přihlašovací jméno nebo heslo není správné";
             return RedirectToAction("Index", "Login");
         }
 
@@ -34,7 +34,7 @@ namespace Rapap.Areas.Admin.Controllers
             FormsAuthentication.SignOut();
             Session.Clear();
 
-            return RedirectToAction("Index", "Login");
+            return RedirectToAction("Index");
         }
 
     }
