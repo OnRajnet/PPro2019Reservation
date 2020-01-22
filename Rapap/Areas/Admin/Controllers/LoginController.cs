@@ -34,7 +34,7 @@ namespace Rapap.Areas.Admin.Controllers
             FormsAuthentication.SignOut();
             Session.Clear();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { area = "", controller = "Home" });
         }
 
     }

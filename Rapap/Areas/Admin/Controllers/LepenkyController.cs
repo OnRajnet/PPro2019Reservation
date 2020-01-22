@@ -14,35 +14,37 @@ namespace Rapap.Areas.Admin.Controllers
             public ActionResult Index(int? page)
             {
 
-            int itemsOnPage = 45;
-            int pg = page.HasValue ? page.Value : 1;
-            int totalLepenky;
+                int itemsOnPage = 45;
+                int pg = page.HasValue ? page.Value : 1;
+                int totalLepenky;
 
 
 
-            LepenkaDao lepenkaDao = new LepenkaDao();
-            IList<Lepenka> lepenky = lepenkaDao.GetLepenkyLists(itemsOnPage, pg, out totalLepenky);
+                LepenkaDao lepenkaDao = new LepenkaDao();
+                IList<Lepenka> lepenky = lepenkaDao.GetLepenkyLists(itemsOnPage, pg, out totalLepenky);
 
-            ViewBag.Pages = (int)Math.Ceiling((double) totalLepenky / (double)itemsOnPage);
-            ViewBag.CurrentPage = pg;
+                ViewBag.Pages = (int)Math.Ceiling((double) totalLepenky / (double)itemsOnPage);
+                ViewBag.CurrentPage = pg;
 
-            ViewBag.Kvality = new LepenkyKvalitaDao().GetAll();
-            RapapUser user = new RapapUserDao().GetByLogin(User.Identity.Name);
+                ViewBag.Kvality = new LepenkyKvalitaDao().GetAll();
+                RapapUser user = new RapapUserDao().GetByLogin(User.Identity.Name);
 
-            if (user.Role.Identifikator == "zakaznik")
-                return View("IndexZakaznik", lepenky);
-
-                return View(lepenky);
+                if (user.Role.Identifikator == "zakaznik")
+                {
+                    return View("IndexZakaznik", lepenky);
+                }
+                else
+                {
+                    return View(lepenky);
+                }
             }
 
             public ActionResult Search(string phrase)
             {
+                LepenkaDao lepenkadao = new LepenkaDao();
+                IList<Lepenka> lepenky = lepenkadao.SearchLepenky(phrase);
 
-            LepenkaDao lepenkadao = new LepenkaDao();
-            IList<Lepenka> lepenky = lepenkadao.SearchLepenky(phrase);
-
-            return View("IndexZakaznik", lepenky);
-
+                return View("IndexZakaznik", lepenky);
             }
             
             [HttpPost]
@@ -86,20 +88,15 @@ namespace Rapap.Areas.Admin.Controllers
 
             public ActionResult Kvalita(int kvalitaId)
             {
-
                 IList<Lepenka> lepenky = new LepenkaDao().GetLepenkyInKvalitaId(kvalitaId);
                 ViewBag.Kvality = new LepenkyKvalitaDao().GetAll();
+
                 return View("IndexZakaznik", lepenky);
-
             }
-
-
-
 
             [Authorize(Roles = "Admin")]
             public ActionResult Create()
             {
-
                 LepenkyKvalitaDao lepenkyKvalitaDao = new LepenkyKvalitaDao();
                 IList<LepenkaKvalita> kvalita = lepenkyKvalitaDao.GetAll();
                 ViewBag.Kvalita = kvalita;
@@ -110,7 +107,6 @@ namespace Rapap.Areas.Admin.Controllers
             [HttpPost]
             public ActionResult Add(Lepenka lepenka, int kvalitaId)
             {
-
                 if (ModelState.IsValid)
                 {
                     LepenkyKvalitaDao lepenkyKvalitaDao = new LepenkyKvalitaDao();
@@ -122,7 +118,6 @@ namespace Rapap.Areas.Admin.Controllers
                     lepenkaDao.Create(lepenka);
 
                     TempData["message-success"] = "Lepenka byla uspesne pridana";
-
                 }
                 else {
                     return View("Create", lepenka);
@@ -133,7 +128,6 @@ namespace Rapap.Areas.Admin.Controllers
             [Authorize(Roles = "Admin")]
             public ActionResult Edit(int id)
             {
-
                 LepenkaDao lepenkaDao = new LepenkaDao();
                 LepenkyKvalitaDao lepenkaKvalitaDao = new LepenkyKvalitaDao();
 
@@ -141,16 +135,13 @@ namespace Rapap.Areas.Admin.Controllers
                 ViewBag.Kvalita = lepenkaKvalitaDao.GetAll();
 
                 return View(l);
-
             }
             [Authorize(Roles = "Admin")]
             [HttpPost]
             public ActionResult Update(Lepenka lepenka, int kvalitaId)
             {
-
                 try
                 {
-
                     LepenkaDao lepenkaDao = new LepenkaDao();
                     LepenkyKvalitaDao lepenkyKvalitaDao = new LepenkyKvalitaDao();
 
@@ -160,25 +151,20 @@ namespace Rapap.Areas.Admin.Controllers
 
                     lepenkaDao.Update(lepenka);
                     TempData["message-success"] = "Lepenka číslo: " + lepenka.Id + " , " + lepenka.Nazev + " , " + " Rozměr " + lepenka.Rozmer + " byla upravena";
-
                 }
                 catch (Exception)
                 {
                     throw;
                 }
 
-
                 return RedirectToAction("Index", "Lepenky");
-
             }
 
             [Authorize(Roles = "Admin")]
             public ActionResult Delete(int id)
             {
-
                 try
                 {
-
                     LepenkaDao lepenkaDao = new LepenkaDao();
                     Lepenka lepenka = lepenkaDao.GetById(id);
 
@@ -193,45 +179,5 @@ namespace Rapap.Areas.Admin.Controllers
 
                 return RedirectToAction("Index");
             }
-
-            [HttpPost]
-            public ActionResult Reserve(FormCollection data)
-        {
-            LepenkaDao lepenkaDao = new LepenkaDao();
-            RezervaceDao rezervaceDao = new RezervaceDao();
-            RapapUser user = new RapapUserDao().GetByLogin(User.Identity.Name);
-
-            foreach (string key in data.AllKeys)
-            {
-                try
-                {
-                    if (data[key] != "false")
-                    {
-                        int id = int.Parse(key.Substring("chbxIsSelected".Length));
-                        Lepenka lepenka = lepenkaDao.GetById(id);
-
-                        rezervaceDao.Create(new Rezervace()
-                        {
-                            Datum = DateTime.UtcNow,
-                            Kartonaz = null,
-                            Lepenka = lepenka,
-                            User = user
-                        });
-                        TempData["message-success"] = "Položka/y byla úspěšně rezervována";
-                    }
-                }
-                catch (Exception)
-                {
-                    throw new HttpUnhandledException();
-                }
-            }
-
-            return RedirectToAction("Index");
-        }
-
-        public ActionResult CreateReserve()
-        {
-            return View();
-        }
     }
 }

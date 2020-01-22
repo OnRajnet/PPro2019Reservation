@@ -2,26 +2,35 @@
 <html>
 <head>
     <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Komplexní obalová řešení">
+    @Html.Partial("_Favicons")
     <title>@ViewBag.Title</title>
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/rapap.css")" rel="stylesheet">
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
+<body style="padding-bottom: 0;">
+    <div class="navbar navbar-inverse navbar-fixed-top menu">
+        <div class="container container-flex">
+            <div class="navbar-header navigation-header">
+                <img src="~/img/logo.png" alt="Alternate Text" class="logo" />
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Rapap", "Index", "Home", null, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    @{Html.RenderAction("Index", "Menu");}
+                    <li class="menu__item"><a class="menu__item-a" href="@Url.Action("Index", "Home")">Úvod</a></li>
+                    <li class="menu__item"><a class="menu__item-a" href="@Url.Action("Index","Lepenky")">Lepenky</a></li>
+                    <li class="menu__item"><a class="menu__item-a" href="@Url.Action("Index","kartonaz")">Kartonáž</a></li>
+                    <li class="menu__item"><a class="menu__item-a" href="@Url.Action("Index","Rezervace")">Moje rezervace</a></li>
+                    <li class="menu__item"><a class="menu__item-a" href="@Url.Action("Index","Poptavka")">Poptávky</a></li>
+                    <li class="menu__item"><a class="menu__item-a" href="@Url.Action("Logout","Login")">Odhlásit se</a></li>
                 </ul>
             </div>
         </div>
@@ -29,12 +38,12 @@
 
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year</p>
-        </footer>
     </div>
-
+    <footer>
+        <div class="container">
+            <p style="margin-bottom: 0;">&copy; @DateTime.Now.Year Rapap s.r.o</p>
+        </div>
+    </footer>
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
 </body>

@@ -4,69 +4,61 @@
 
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Kartonáž";
 }
+    <div class="jumbotron">
+        <h2>Dostupné kartonáže</h2>
 
-<h2>Přehled dostupných lepenek</h2>
-
-<div class="clearfix"></div>
-
-<div class="panel">
-    <div class="panel-body">
-        @using (Html.BeginForm("Search", "Kartonaz"))
-        {
-            <input type="text" class="form-control" placeholder="Vyhledat kartonaz" name="phrase" />
-            <input type="submit" value="Hledat" class="btn btn-default" />
-        }
-
-
-    </div>
-</div>
-
-
-@using (Html.BeginForm("Reserve", "Kartonaz", FormMethod.Post))
-{
-    <table class="table table-bordered table-hover table-condensed">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Název</th>
-                <th>Rozměr</th>
-                <th>Počet kusů</th>
-                <th>Rezervace</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (Kartonaz k in Model)
+        <div class="well">
+            @using (Html.BeginForm("Search", "Kartonaz"))
             {
-                <tr>
-                    <td>@k.Id</td>
-                    <td>@k.Oznaceni</td>
-                    <td>@k.Rozmer</td>
-                    <td>@k.Pocet</td>
-                    <td>@Html.CheckBox("chbxIsSelected"+k.Id, k.IsSelected)</td>
-                </tr>
+                <input type="text" class="form-control" placeholder="Vyhledat kartonaz" name="phrase" />
+                <input type="submit" value="Hledat" class="btn btn-default" />
             }
-        </tbody>
-    </table>
-
-    <div class="panel">
-        <div class="panel-body">
-            <input type="submit" value="Rezervovat" class="btn btn-default" />
         </div>
-    </div>
-}
 
-@if (ViewBag.Pages != null)
-{
+        @using (Html.BeginForm("Reserve", "Kartonaz", FormMethod.Post))
+        {
+            <div style="overflow-x: auto;">
+                <table class="table table-hover table-condensed">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Název</th>
+                            <th>Rozměr</th>
+                            <th>Počet kusů</th>
+                            <th>Rezervace</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (Kartonaz k in Model)
+                        {
+                            <tr>
+                                <td>@k.Id</td>
+                                <td>@k.Oznaceni</td>
+                                <td>@k.Rozmer</td>
+                                <td>@k.Pocet</td>
+                                <td>@Html.CheckBox("chbxIsSelected" + k.Id, k.IsSelected)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
 
-    <ul class="pagination">
+            <input type="submit" value="Rezervovat" class="btn btn-default" />
+        }
 
-        @for (int i = 1; i <= ViewBag.Pages; i++)
+        @if (ViewBag.Pages != null)
         {
 
-            <li class="@(ViewBag.CurrentPage == i ? "active" : "")"><a href="@Url.Action("Index", "Kartonaz", new { page = i })">@i</a></li>
+            <ul class="pagination">
 
+                @for (int i = 1; i <= ViewBag.Pages; i++)
+                {
+
+                    <li class="@(ViewBag.CurrentPage == i ? "active" : "")"><a href="@Url.Action("Index", "Kartonaz", new { page = i })">@i</a></li>
+
+                }
+            </ul>
         }
-    </ul>
-}
+    </div>

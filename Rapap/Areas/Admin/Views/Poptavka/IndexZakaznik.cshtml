@@ -1,22 +1,14 @@
 ﻿
 @{
-    ViewBag.Title = "IndexZakaznik";
+    ViewBag.Title = "Poptávka";
 }
 
-<h2>IndexZakaznik</h2>
-<p>
-    Nenašli jste, co jste hledali?
-</p>
-
-<p>
-    Zašlete nám zdarma poptávku přes náš webový formulář.
-</p>
-<p>
-    Nenašli jste, co jste hledali?
-    Zašlete nám zdarma poptávku přes náš webový formulář.
-
-    <a href="@Url.Action("Create","Poptavka")" class="btn btn-default pull-right">Poptávkový formulář</a>
-    <div class="clearfix"></div>
-
-</p>
-
+    <div class="jumbotron">
+        <h2 style="margin-top:0;margin-bottom:40px">Nenašli jste, co jste hledali?</h2>
+        <p style="margin-bottom: 20px">
+            Zašlete nám zdarma poptávku přes náš webový formulář.
+        </p>
+        <p>
+            <a href="@Url.Action("Create","Poptavka")" class="btn btn-default">Poptávkový formulář</a>
+        </p>
+    </div>

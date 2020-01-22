@@ -5,24 +5,20 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
-
-    <title>Rapap</title>
-
-    <!-- Bootstrap core CSS -->
+    <meta name="description" content="Komplexní obalová řešení">
+    @Html.Partial("_Favicons")
+    <title>@ViewBag.Title</title>
     <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet">
     <link href="@Url.Content("~/Content/bootstrap-therme.min.css")" rel="stylesheet">
     <link href="@Url.Content("~/Content/rapap.css")" rel="stylesheet">
 </head>
 
 <body>
-    <nav class="navbar navbar-fixed-top navbar-inverse">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+    <nav class="navbar navbar-fixed-top navbar-inverse menu">
+        <div class="container container-flex">
+            <div class="navbar-header navigation-header">
+                <img src="~/img/logo.png" alt="Alternate Text" class="logo" />
+                <button type="button" class="navbar-toggle collapsed js-button" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -31,57 +27,42 @@
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="@Url.Action("Index","Home")">Úvod</a></li>
-                    <li><a href="@Url.Action("Index","Lepenka")">Lepenky</a></li>
-                    <li><a href="@Url.Action("Index","Karton")">Kartonáž</a></li>
-                    <li><a href="@Url.Action("Index","Poptavka")">Poptávka</a></li>
-                    <li><a href="@Url.Action("Index","Login",new { area = "Admin"})">Vstup do systému</a></li>
+                    <li class="menu__item"><a class="menu__item-a" href="@Url.Action("Index","Home")">Úvod</a></li>
+                    <li class="menu__item"><a class="menu__item-a" href="@Url.Action("Index","Lepenka")">Lepenky</a></li>
+                    <li class="menu__item"><a class="menu__item-a" href="@Url.Action("Index","Karton")">Kartonáž</a></li>
+                    <li class="menu__item"><a class="menu__item-a" href="@Url.Action("Index","Poptavka")">Poptávka</a></li>
+                    <li class="menu__item"><a class="menu__item-a" href="@Url.Action("Index","Login",new { area = "Admin"})">Přihlásit se</a></li>
                 </ul>
-            </div><!-- /.nav-collapse -->
-        </div><!-- /.container -->
-    </nav><!-- /.navbar -->
+            </div>
+        </div>
+    </nav>
 
     <div class="container">
-
-        <div class="row row-offcanvas row-offcanvas-right">
-
-            <div class="col-xs-12 col-sm-9">
-                <p class="pull-right visible-xs">
-                    <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
-                </p>
-                <div class="jumbotron">
-
-
-                    @if (TempData["message-success"] != null)
-                    {
-                        <div class="alert alert-success alert-dismissible fade in" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-                            @TempData["message-success"]
-                        </div>
-                    }
-
-
-                    @RenderBody()
+        <div class="jumbotron">
+            @if (TempData["message-success"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade in" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    @TempData["message-success"]
                 </div>
-            </div><!--/.col-xs-12.col-sm-9-->
-        </div><!--/row-->
-
-        <hr>
-
-        <footer>
-            <p>&copy; 2017 Společnost Rapap s.r.o. je evidována v Obchodním rejstříku vedeném Krajským soudem v Hradci Králové, spisová značka: C 34585. Adresa společnosti: Tetov 50, CZ-53316, IČ:03688755 DIČ/VAT: CZ03688755</p>
-        </footer>
-
-    </div><!--/.container-->
-
-    </div><!--/.container-->
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
+            }
+            @RenderBody()
+        </div>
+    </div>
+    <footer>
+        <div class="container">
+            <p style="margin-bottom: 0;">&copy; @DateTime.Now.Year Rapap s.r.o</p>
+        </div>
+    </footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="@Url.Content("~/script/boorstrap.min.js")"></script>
     <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
     <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+    <script>
+        $(".js-button").click(function () {
+            $(".navbar-collapse").toggle(".collapse");
+        });
+    </script>
 
 
 </body>

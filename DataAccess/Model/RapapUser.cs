@@ -21,11 +21,5 @@ namespace DataAccess.Model
         {
             return Login;
         }
-
-
-        public override string ToString()
-        {
-            return Login;
-        }
     }
 }

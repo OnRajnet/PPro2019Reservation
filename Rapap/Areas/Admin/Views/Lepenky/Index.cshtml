@@ -4,58 +4,57 @@
 
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Lepenky";
 }
 
-<h2>Přehled dostupných lepenek</h2>
+    <div class="jumbotron">
+        <h2>Přehled dostupných lepenek</h2>
 
-<div class="panel">
-    <div class="panel-body">
-        @using (Html.BeginForm("Search", "Lepenky"))
-        {
-            <input type="text" class="form-control" placeholder="Vyhledat lepenku (Rozměr)" name="phrase" />
-            <input type="submit" value="Hledat" class="btn btn-default" />
-        }
+        <div class="well">
+            @using (Html.BeginForm("Search", "Lepenky"))
+            {
+                <input type="text" class="form-control" placeholder="Vyhledat lepenku (Rozměr)" name="phrase" />
+                <input type="submit" value="Hledat" class="btn btn-default" />
+            }
+        </div>
+        
 
 
+        <a href="@Url.Action("Create","Lepenky")" class="btn btn-default pull-right">Vytvoření lepenky</a>
+        <div class="clearfix"></div>
+
+        <br />
+
+
+        <table class="table table-bordered table-hover table-condensed">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Název</th>
+                    <th>Gramáž</th>
+                    <th>Rozměr</th>
+                    <th>Kvalita</th>
+                    <th>Akce</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Lepenka l in Model)
+                {
+                    <tr>
+                        <td>@l.Id</td>
+                        <td>@l.Nazev</td>
+                        <td>@l.Gramaz</td>
+                        <td>@l.Rozmer</td>
+                        <td>@l.Kvalita.Kvalita</td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", "Lepenky", new { id = l.Id }, null)
+                            @Html.ActionLink("Delete", "Delete", "Lepenky", new { id = l.Id }, new { onclick = "return confirm('Přejete si opravdu smazat položku " + l.Id + " " + l.Nazev + " " + l.Rozmer + "');" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
-</div>
-
-
-<a href="@Url.Action("Create","Lepenky")" class="btn btn-default pull-right" >Vytvoření lepenky</a>
-<div class="clearfix"></div>
-
-<br/>
-
-
-<table class="table table-bordered table-hover table-condensed">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Název</th>
-            <th>Gramáž</th>
-            <th>Rozměr</th>
-            <th>Kvalita</th>
-            <th>Akce</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (Lepenka l in Model)
-        {
-            <tr>
-                <td>@l.Id</td>
-                <td>@l.Nazev</td>
-                <td>@l.Gramaz</td>
-                <td>@l.Rozmer</td>
-                <td>@l.Kvalita.Kvalita</td>
-                <td>
-                    @Html.ActionLink("Edit","Edit","Lepenky",new { id= l.Id}, null)
-                    @Html.ActionLink("Delete", "Delete", "Lepenky", new { id = l.Id }, new { onclick = "return confirm('Přejete si opravdu smazat položku " + l.Id + " " +l.Nazev+ " " + l.Rozmer + "');" })
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
 
 
 

@@ -4,40 +4,33 @@
 
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Lepenky";
 }
 
-<h2>Přehled dostupných lepenek</h2>
-
-<div class="clearfix"></div>
-
-
-<table class="table table-bordered table-hover table-condensed">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Název</th>
-            <th>Gramáž</th>
-            <th>Rozměr</th>
-            <th>Kvalita</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (Lepenka l in Model)
-        {
+<h2 style="margin-top:0;">Dostupné lepenky</h2>
+<br />
+<div style="overflow-x:auto">
+    <table class="table table-hover table-condensed">
+        <thead>
             <tr>
-                <td>@l.Id</td>
-                <td>@l.Nazev</td>
-                <td>@l.Gramaz</td>
-                <td>@l.Rozmer</td>
-                <td>@l.Kvalita.Kvalita</td>
+                <th>ID</th>
+                <th>Název</th>
+                <th>Gramáž</th>
+                <th>Rozměr</th>
+                <th>Kvalita</th>
             </tr>
-        }
-    </tbody>
-</table>
-
-
-
-
-
-
+        </thead>
+        <tbody>
+            @foreach (Lepenka l in Model)
+            {
+                <tr>
+                    <td>@l.Id</td>
+                    <td>@l.Nazev</td>
+                    <td>@l.Gramaz</td>
+                    <td>@l.Rozmer</td>
+                    <td>@l.Kvalita.Kvalita</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

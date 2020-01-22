@@ -5,42 +5,42 @@
 
 
     @{
-        ViewBag.Title = "IndexZakaznik";
+        ViewBag.Title = "Moje rezervace";
     }
 
+    <div class="jumbotron">
         <h2>Moje objednávky</h2>
 
-        <div class="clearfix"></div>
-
-
-        <table class="table table-bordered table-hover table-condensed">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Uživatel</th>
-                    <th>Zboží</th>
-                    <th>Datum</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (Rezervace r in Model)
-                {
-                <tr>
-                    <td>@r.Id</td>
-                    <td>@r.User</td>
-                    @if (r.Lepenka == null && r.Kartonaz != null)
+        <div style="overflow-x:auto">
+            <table class="table table-hover table-condensed">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Uživatel</th>
+                        <th>Zboží</th>
+                        <th>Datum</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Rezervace r in Model)
                     {
-                        <td>@r.Kartonaz</td>
+                        <tr>
+                            <td>@r.Id</td>
+                            <td>@r.User</td>
+                            @if (r.Lepenka == null && r.Kartonaz != null)
+                            {
+                                <td>@r.Kartonaz</td>
+                            }
+                            else
+                            {
+                                <td>@r.Lepenka</td>
+                            }
+                            <td>@r.Datum</td>
+                        </tr>
                     }
-                    else
-                    {
-                        <td>@r.Lepenka</td>
-                    }
-                    <td>@r.Datum</td>
-                </tr>
-                }
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
 
         @if (ViewBag.Pages != null)
         {
@@ -55,3 +55,4 @@
                 }
             </ul>
         }
+    </div>

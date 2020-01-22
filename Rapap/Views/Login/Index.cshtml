@@ -10,8 +10,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="">
-
 
     <title>Rapap - login</title>
 
@@ -66,30 +64,24 @@
                 border-top-right-radius: 0;
             }
     </style>
-
-
 </head>
-
 <body>
-
     <div class="container">
-
         @if (TempData["error"] != null)
         {
             <p>@TempData["error"]</p>
         }
 
-
         @using (Html.BeginForm("SignIn", "Login", FormMethod.Post, new { @class = "form-signin" }))
         {
 
-            <h2 class="form-signin-heading">Prosím,přihlašte se</h2>
-            <label for="inputEmail" class="sr-only">Login</label>
-            <input type="text" id="inputEmail" class="form-control" placeholder="User name" name="login">
-            <label for="inputPassword" class="sr-only">Password</label>
+            <h2 class="form-signin-heading" style="margin-bottom: 30px;text-align: center;">Přihlašovací údaje</h2>
+            <label for="inputEmail" class="">Login</label>
+            <input type="text" id="inputEmail" class="form-control" style="margin-bottom: 5px;" placeholder="User name" name="login">
+            <label for="inputPassword" class="">Heslo</label>
             <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password">
 
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Přihlásit se</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit" style="margin-top: 20px;">Přihlásit se</button>
 
         }
 
