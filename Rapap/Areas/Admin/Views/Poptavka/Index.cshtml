@@ -7,38 +7,34 @@
     ViewBag.Title = "Poptávka";
 }
 
-<h2>Přehled poptávek</h2>
+    <div class="jumbotron">
+        <h2>Přehled poptávek</h2>
 
-<br />
-
-<br/>
-
-
-<table class="table table-bordered table-hover table-condensed">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Jméno/Název firmy</th>
-            <th>Email</th>
-            <th>Číslo</th>
-            <th>Typ</th>
-            <th>Poptávka</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (Poptavka p in Model)
-        {
-            <tr>
-                <td>@p.Id</td>
-                <td>@p.Jmeno</td>
-                <td>@p.Email</td>
-                <td>@p.Cislo</td>
-                <td>@p.Typ.Typ</td>
-                <td>@p.Zprava</td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-
-
+        <div style="overflow-x:auto">
+            <table class="table table-hover table-condensed">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Jméno/Název firmy</th>
+                        <th>Email</th>
+                        <th>Číslo</th>
+                        <th>Typ</th>
+                        <th>Poptávka</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Poptavka p in Model)
+                    {
+                        <tr>
+                            <td>@p.Id</td>
+                            <td>@p.Jmeno</td>
+                            <td>@p.Email</td>
+                            <td>@p.Cislo</td>
+                            <td>@p.Typ.Typ</td>
+                            <td>@p.Zprava</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>

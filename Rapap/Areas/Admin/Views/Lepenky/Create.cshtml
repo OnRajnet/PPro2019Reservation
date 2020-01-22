@@ -3,48 +3,50 @@
 @{
     ViewBag.Title = "Přidat lepenku";
 }
+    <div class="jumbotron">
+        <h2>Nová Lepenka</h2>
 
-<h2>Nová Lepenka</h2>
+        @Html.ValidationSummary()
 
-@Html.ValidationSummary()
+        @using (Html.BeginForm("Add", "Lepenky", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+        {
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Název</label>
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(x => x.Nazev, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.Nazev)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Rozměr</label>
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(x => x.Rozmer, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.Rozmer)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Gramáž</label>
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(x => x.Gramaz, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.Gramaz)
+                </div>
+            </div>
 
-@using (Html.BeginForm("Add", "Lepenky", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
-{
-    <div class="form-group">
-        <label class="col-sm-2 control-label">Název</label>
-        <div class="col-sm-10">
-            @Html.TextBoxFor(x => x.Nazev, new {@class = "form-control"})
-            @Html.ValidationMessageFor(x => x.Nazev)
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label">Rozměr</label>
-        <div class="col-sm-10">
-            @Html.TextBoxFor(x => x.Rozmer, new { @class = "form-control" })
-            @Html.ValidationMessageFor(x => x.Rozmer) 
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label">Gramáž</label>
-        <div class="col-sm-10">
-            @Html.TextBoxFor(x => x.Gramaz, new { @class = "form-control" })
-            @Html.ValidationMessageFor(x => x.Gramaz)
-        </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Kvalita</label>
+                <div class="col-sm-10">
+                    @Html.DropDownList("kvalitaId", new SelectList(ViewBag.Kvalita, "Id", "Kvalita"), new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default">Vytvořit lepenku</button>
+                </div>
+            </div>
+        }
     </div>
 
-    <div class="form-group">
-        <label class="col-sm-2 control-label">Kvalita</label>
-        <div class="col-sm-10">
-            @Html.DropDownList("kvalitaId",new SelectList(ViewBag.Kvalita,"Id","Kvalita"), new { @class = "form-control" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-default">Vytvořit lepenku</button>
-        </div>
-    </div>
-}
 
 <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
 <script>tinymce.init({ selector: '.formatedtext' });</script>

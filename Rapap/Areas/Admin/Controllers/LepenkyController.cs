@@ -107,21 +107,15 @@ namespace Rapap.Areas.Admin.Controllers
             [HttpPost]
             public ActionResult Add(Lepenka lepenka, int kvalitaId)
             {
-                if (ModelState.IsValid)
-                {
-                    LepenkyKvalitaDao lepenkyKvalitaDao = new LepenkyKvalitaDao();
-                    LepenkaKvalita lepenkaKvalita = lepenkyKvalitaDao.GetById(kvalitaId);
+                LepenkyKvalitaDao lepenkaKvalitaDao = new LepenkyKvalitaDao();
+                LepenkaKvalita lepenkaKvalita = lepenkaKvalitaDao.GetById(kvalitaId);
 
-                    lepenka.Kvalita = lepenkaKvalita;
+                lepenka.Kvalita = lepenkaKvalita;
 
-                    LepenkaDao lepenkaDao = new LepenkaDao();
-                    lepenkaDao.Create(lepenka);
+                LepenkaDao lepenkaDao = new LepenkaDao();
+                lepenkaDao.Create(lepenka);
 
-                    TempData["message-success"] = "Lepenka byla uspesne pridana";
-                }
-                else {
-                    return View("Create", lepenka);
-                }
+                TempData["message-success"] = "Lepenka byla uspesne pridana";
 
                 return RedirectToAction("Index");
             }
