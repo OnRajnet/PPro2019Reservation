@@ -15,11 +15,8 @@ namespace Rapap.Areas.Admin.Controllers
         // GET: Admin/Menu
         public ActionResult Index()
         {
-
             RapapUserDao rapapUserDao = new RapapUserDao();
             RapapUser rapapUser = rapapUserDao.GetByLogin(User.Identity.Name);
-
-
 
             return View(rapapUser);
         }
